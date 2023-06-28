@@ -15,7 +15,7 @@ public class Main {
 	}
 
 	public void dealerStrategy() {
-		Player player = new Player(new CardDeck(1));
+		Player player = new Player(new CardDeck(6));
 		double bJWins = 0;
 		double wins = 0;
 		double draws = 0;

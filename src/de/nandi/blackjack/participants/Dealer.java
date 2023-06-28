@@ -10,6 +10,11 @@ public class Dealer extends Participant {
 		this.player = player;
 	}
 
+	/**
+	 * It's now the dealers turn.
+	 * Starts with the standard strategy for the dealer with standing on a soft 17.
+	 * @return profit multipler for player. Could be 2(won), 2.5(won with blackjack), -1(lost), 1(undecided/draw).
+	 */
 	public double start() {
 		while (deck.countValueBeneficial(cards) < 17) {
 			double multiplier = hits();
@@ -19,6 +24,10 @@ public class Dealer extends Participant {
 		return stand();
 	}
 
+	/**
+	 * Dealer doesn't take another card and ends their turn.
+	 * Method calculates who wins and how much.
+	 */
 	@Override
 	public double stand() {
 		int sumPlayer = deck.countValueBeneficial(player.cards);

@@ -23,8 +23,6 @@ public class Player extends Participant {
 
 	public double dealerStrategy() {
 		newHand();
-		if(deck.countValueBeneficial(cards)==21)
-			return stand();
 		while (deck.countValueBeneficial(cards) < 17) {
 			if(hits() == -1)
 				return -1;
@@ -32,6 +30,11 @@ public class Player extends Participant {
 		return stand();
 	}
 
+
+	/**
+	 * Player doesn't take another card and ends their turn.
+	 * It's now the dealers turn.
+	 */
 	@Override
 	public double stand() {
 		return dealer.start();

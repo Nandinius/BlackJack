@@ -17,22 +17,22 @@ class DealerTest {
         player.cards.addAll(Arrays.asList(10, 11));
         dealer.cards.clear();
         dealer.cards.addAll(Arrays.asList(10, 11));
-        assertEquals(1, dealer.stand());
+        assertEquals(1, dealer.stand()); //Draw because of same number
         player.cards.clear();
         player.cards.addAll(Arrays.asList(10, 8, 11));
         dealer.cards.clear();
         dealer.cards.addAll(Arrays.asList(10, 7, 11));
-        assertEquals(2, dealer.stand());
+        assertEquals(2, dealer.stand());//Player wins because he has a higher number
         player.cards.clear();
         player.cards.addAll(Arrays.asList(10, 11));
         dealer.cards.clear();
         dealer.cards.addAll(Arrays.asList(10, 8));
-        assertEquals(2.5, dealer.stand());
+        assertEquals(2.5, dealer.stand());//Player wins with blackjack
         player.cards.clear();
         player.cards.addAll(Arrays.asList(10, 8));
         dealer.cards.clear();
         dealer.cards.addAll(Arrays.asList(10, 11));
-        assertEquals(-1, dealer.stand());
+        assertEquals(-1, dealer.stand());//Player looses because of lower number
     }
 
     @Test

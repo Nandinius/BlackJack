@@ -1,4 +1,4 @@
-package de.nandi.blackjack;
+package de.nandi.blackjack.util;
 
 public enum Card {
 //	ACE(11,1),

@@ -1,4 +1,4 @@
-package de.nandi.blackjack;
+package de.nandi.blackjack.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +9,8 @@ public class CardDeck {
 	private final ArrayList<Integer> usedCardDeck;
 	private final int decks;
 	private boolean shuffled;
+
+	private int runningCount = 0;
 
 	public CardDeck(int decks) {
 		this.decks = decks;
@@ -48,13 +50,17 @@ public class CardDeck {
 		if (usedCardDeck.size() >= currentCardDeck.size() * 3) {
 			shuffle();
 		}
+		if (card <= 6)
+			runningCount++;
+		if (card >= 10)
+			runningCount--;
 		return card;
 	}
 
 	/**
 	 * @return true if the deck was shuffled since the last call to {@code wasShuffled}
 	 */
-	public boolean wasShuffled() {
+	public boolean wasShuffled() {//TODO vielleicht unnötig
 		if (shuffled) {
 			shuffled = false;
 			return true;
@@ -70,6 +76,7 @@ public class CardDeck {
 		usedCardDeck.clear();
 		Collections.shuffle(currentCardDeck);
 		shuffled = true;
+		runningCount = 0;
 	}
 
 	/**
@@ -89,5 +96,13 @@ public class CardDeck {
 
 	public ArrayList<Integer> getCurrentCardDeck() {
 		return currentCardDeck;
+	}
+
+	public int getDecks() {
+		return decks;
+	}
+
+	public int getRunningCount() {
+		return runningCount;
 	}
 }

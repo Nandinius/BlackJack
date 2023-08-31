@@ -1,25 +1,28 @@
 package de.nandi.blackjack.participants;
 
-import de.nandi.blackjack.CardDeck;
+import de.nandi.blackjack.util.CardDeck;
+import de.nandi.blackjack.util.Result;
 
 public class Dealer extends Participant {
-	private final Player player;
+	private final PlayerStrategy playerStrategy;
 
-	public Dealer(CardDeck deck, Player player) {
+	public Dealer(CardDeck deck, PlayerStrategy playerStrategy) {
 		super(deck);
-		this.player = player;
+		this.playerStrategy = playerStrategy;
 	}
 
 	/**
 	 * It's now the dealers turn.
 	 * Starts with the standard strategy for the dealer with standing on a soft 17.
-	 * @return profit multipler for player. Could be 2(won), 2.5(won with blackjack), -1(lost), 1(undecided/draw).
+	 *
+	 * @return result for Player
+	 * @see Result
 	 */
-	public double start() {
+	public Result start() {
 		while (deck.countValueBeneficial(cards) < 17) {
-			double multiplier = hits();
-			if (multiplier != 1)
-				return multiplier;
+			Result result = hits();
+			if (result != Result.UNDECIDED)
+				return result;
 		}
 		return stand();
 	}
@@ -27,24 +30,33 @@ public class Dealer extends Participant {
 	/**
 	 * Dealer doesn't take another card and ends their turn.
 	 * Method calculates who wins and how much.
+	 *
+	 * @return result for Player
+	 * @see Result
 	 */
 	@Override
-	public double stand() {
-		int sumPlayer = deck.countValueBeneficial(player.cards);
+	public Result stand() {
+		int sumPlayer = deck.countValueBeneficial(playerStrategy.cards);
 		int sumDealer = deck.countValueBeneficial(cards);
-		if(sumPlayer > sumDealer)
-			return sumPlayer == 21 ? 2.5 : 2;
-		else if(sumPlayer<sumDealer)
-			return -1;
+		if (sumPlayer > sumDealer)
+			return sumPlayer == 21 ? Result.BJ_WIN : Result.WIN;
+		else if (sumPlayer < sumDealer)
+			return Result.LOST;
 		else
-			return 1;
+			return Result.DRAW;
 	}
 
+	/**
+	 * Dealer hits and may have lost.
+	 *
+	 * @return Result for Player
+	 * @see Result
+	 */
 	@Override
-	public double hits() {
+	public Result hits() {
 		cards.add(deck.drawCard());
 		if (deck.countValueBeneficial(cards) > 21)
-			return deck.countValueBeneficial(player.cards) == 21 ? 2.5 : 2;
-		return 1;
+			return deck.countValueBeneficial(playerStrategy.cards) == 21 ? Result.BJ_WIN : Result.WIN;
+		return Result.UNDECIDED;
 	}
 }

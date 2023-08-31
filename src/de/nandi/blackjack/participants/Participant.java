@@ -1,12 +1,13 @@
 package de.nandi.blackjack.participants;
 
-import de.nandi.blackjack.CardDeck;
+import de.nandi.blackjack.util.CardDeck;
+import de.nandi.blackjack.util.Result;
 
 import java.util.ArrayList;
 
 public abstract class Participant {
-	final ArrayList<Integer> cards;
-	final CardDeck deck;
+	protected final ArrayList<Integer> cards;
+	protected final CardDeck deck;
 
 	protected Participant(CardDeck deck) {
 		this.deck = deck;
@@ -15,13 +16,17 @@ public abstract class Participant {
 
 	/**
 	 * Participant doesn't take another card and ends their turn.
-	 * @return profit multipler for player. Could be 2(won), 2.5(won with blackjack), -1(lost), 1(undecided/draw).
+	 *
+	 * @return result for Player
+	 * @see Result
 	 */
-	public abstract double stand();
+	public abstract Result stand();
 
 	/**
 	 * Participant takes another card.
-	 * @return profit multipler for player. Could be 2(won), 2.5(won with blackjack), -1(lost), 1(undecided/draw).
+	 *
+	 * @return result for Player
+	 * @see Result
 	 */
-	public abstract double hits();
+	public abstract Result hits();
 }

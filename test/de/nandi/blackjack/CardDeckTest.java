@@ -1,5 +1,6 @@
 package de.nandi.blackjack;
 
+import de.nandi.blackjack.util.CardDeck;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

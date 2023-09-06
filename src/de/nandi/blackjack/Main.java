@@ -1,7 +1,7 @@
 package de.nandi.blackjack;
 
 import de.nandi.blackjack.participants.PlayerStrategy;
-import de.nandi.blackjack.strategies.DealerStrategyCounting;
+import de.nandi.blackjack.strategies.EvolvedBasicStrategy;
 import de.nandi.blackjack.util.CardDeck;
 import de.nandi.blackjack.util.Trio;
 
@@ -19,10 +19,10 @@ public class Main {
 
 
     public Main() {
-        testStrategy(new DealerStrategyCounting(new CardDeck(1)), true);
-        testStrategy(new DealerStrategyCounting(new CardDeck(1)), true);
+        //testStrategy(new DealerStrategyCounting(new CardDeck(1)), true);
+        //testStrategy(new DealerStrategyCounting(new CardDeck(1)), true);
         for (int i = 10; i > 0; i--) {
-            //testStrategy(new DealerStrategyCounting(new CardDeck(i)), false);
+            testStrategy(new EvolvedBasicStrategy(new CardDeck(i)), true);
         }
         //dealerStrategy();
         //formatPercentage(0.298, 0.110, 0.104, 0.488, 1, 10000000, "dealer");
@@ -42,36 +42,36 @@ public class Main {
         double lossesWPC = 0;
         double gainsWPC = 0;
         int gamesWPC = 0;
-        for (int i = 0; i < games; i++) {
-            Trio result = playerStrategy.strategy();
-            switch (result.getResult()) {
-                case BJ_WIN -> {
-                    if (result.getTrueCount() > 1)
-                        bJWinsWPC++;
-                    bJWins++;
+        for (int i = 0; i < games; i++)
+            for (Trio result : playerStrategy.newGame()) {
+                switch (result.getResult()) {
+                    case BJ_WIN -> {
+                        if (result.getTrueCount() > 1)
+                            bJWinsWPC++;
+                        bJWins++;
+                    }
+                    case WIN -> {
+                        if (result.getTrueCount() > 1)
+                            winsWithPositiveCount++;
+                        wins++;
+                    }
+                    case DRAW -> {
+                        if (result.getTrueCount() > 1)
+                            drawsWPC++;
+                        draws++;
+                    }
+                    case LOST -> {
+                        if (result.getTrueCount() > 1)
+                            lossesWPC++;
+                        losses++;
+                    }
                 }
-                case WIN -> {
-                    if (result.getTrueCount() > 1)
-                        winsWithPositiveCount++;
-                    wins++;
-                }
-                case DRAW -> {
-                    if (result.getTrueCount() > 1)
-                        drawsWPC++;
-                    draws++;
-                }
-                case LOST -> {
-                    if (result.getTrueCount() > 1)
-                        lossesWPC++;
-                    losses++;
-                }
+                gains += result.getGain();
+                if (result.getTrueCount() > 1)
+                    gainsWPC += result.getGain();
+                if (result.getTrueCount() > 1)
+                    gamesWPC++;
             }
-            gains += result.getGain();
-            if (result.getTrueCount() > 1)
-                gainsWPC += result.getGain();
-            if (result.getTrueCount() > 1)
-                gamesWPC++;
-        }
 //        File result = formatPercentage(wins / games, bJWins / games, draws / games, losses / games,
 //                gain / games, 1, games,
 //                playerStrategy.getDecks(), playerStrategy.getName(), playerStrategy.isCardCounting(), saveToFile);

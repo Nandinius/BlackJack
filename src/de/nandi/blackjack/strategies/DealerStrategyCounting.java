@@ -22,9 +22,8 @@ public class DealerStrategyCounting extends PlayerStrategy {
 	}
 
 	@Override
-	public Trio strategy() {
-		newHand();
-		int betCount = deck.getTrueCount();//TODO wrong way around
+	public Trio[] strategy(int ignored) {
+		int betCount = -deck.getTrueCount();//TODO wrong way around
 		count.add(betCount);
 		if (betCount < 1)
 			betCount = 1;
@@ -32,9 +31,9 @@ public class DealerStrategyCounting extends PlayerStrategy {
 		bets.add(bet);
 		while (deck.countValueBeneficial(cards) < 17) {
 			if (hits() == Result.LOST)
-				return new Trio(bet, Result.LOST, betCount);
+				return new Trio[]{new Trio(bet, Result.LOST, betCount)};
 		}
-		return new Trio(bet, stand(), betCount);
+		return new Trio[]{new Trio(bet, stand(), betCount)};
 	}
 
 	public void saveExcel() throws Exception {

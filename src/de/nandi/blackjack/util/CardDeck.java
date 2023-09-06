@@ -50,10 +50,10 @@ public class CardDeck {
         if (usedCardDeck.size() >= currentCardDeck.size() * 3) {
             shuffle();
         }
-        if (card <= 6) //TODO wrong way
-            runningCount--;
-        if (card >= 10)
+        if (card <= 6)
             runningCount++;
+        if (card >= 10)
+            runningCount--;
         return card;
     }
 
@@ -84,10 +84,10 @@ public class CardDeck {
      * @return the sum of all the values of the cards with choosing aces as 1 if the sum would be over 21
      */
     public int countValueBeneficial(ArrayList<Integer> cards) {
-        cards.sort(null);
-        int sum = cards.stream().mapToInt(Integer::intValue).sum();
+        ArrayList<Integer> cardsCopy = new ArrayList<>(cards);
+        int sum = cardsCopy.stream().mapToInt(Integer::intValue).sum();
         while (sum > 21)
-            if (cards.remove(Integer.valueOf(11))) {
+            if (cardsCopy.remove(Integer.valueOf(11))) {
                 sum -= 10;
             } else
                 break;

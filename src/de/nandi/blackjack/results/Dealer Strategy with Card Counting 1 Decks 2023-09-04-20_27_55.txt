@@ -1,0 +1,10 @@
+Dealer Strategy with Card Counting
+1 Decks
+1000000 simulated Games
+29.7% win percentage
+11.1% Blackjack win percentage
+10.2% draw percentage
+48.9% loss percentage
+Average gain (μ): -7.0
+
+39.9% (bj)wins with positive count percentage

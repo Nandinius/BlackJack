@@ -59,4 +59,8 @@ public class Dealer extends Participant {
 			return deck.countValueBeneficial(playerStrategy.cards) == 21 ? Result.BJ_WIN : Result.WIN;
 		return Result.UNDECIDED;
 	}
+
+	public int openCard(){
+		return cards.get(0);
+	}
 }

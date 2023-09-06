@@ -1,20 +1,21 @@
 package de.nandi.blackjack.participants;
 
 import de.nandi.blackjack.util.CardDeck;
-import de.nandi.blackjack.util.Duo;
+import de.nandi.blackjack.util.Trio;
 import de.nandi.blackjack.util.Result;
 
 public abstract class PlayerStrategy extends Participant {
 	final Dealer dealer;
 	protected int bet;
 	private final String name;
+	private final boolean cardCounting;
 
-	public PlayerStrategy(CardDeck deck, String name) {
+	public PlayerStrategy(CardDeck deck, String name, boolean cardCounting) {
 		super(deck);
 		this.name = name;
+		this.cardCounting = cardCounting;
 		deck.wasShuffled();
 		dealer = new Dealer(deck, this);
-		newHand();
 	}
 
 	protected void newHand() {
@@ -26,7 +27,7 @@ public abstract class PlayerStrategy extends Participant {
 		dealer.cards.add(deck.drawCard());
 	}
 
-	public abstract Duo strategy();
+	public abstract Trio strategy();
 
 
 	/**
@@ -48,5 +49,13 @@ public abstract class PlayerStrategy extends Participant {
 
 	public String getName() {
 		return name;
+	}
+
+	public int getDecks() {
+		return deck.getDecks();
+	}
+
+	public boolean isCardCounting() {
+		return cardCounting;
 	}
 }

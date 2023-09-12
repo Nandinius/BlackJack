@@ -1,0 +1,8 @@
+--- EvolvedBasicStrategy ---
+7 Decks
+10000000 simulated Games
+39.35% win 
+4.89% Blackjack win 
+8.89% draw 
+49.08% loss 
+Average gain (μ): -0.89%

@@ -39,8 +39,12 @@ public class Dealer extends Participant {
 		int sumPlayer = deck.countValueBeneficial(playerStrategy.cards);
 		int sumDealer = deck.countValueBeneficial(cards);
 		if (sumPlayer > sumDealer)
-			return sumPlayer == 21 ? Result.BJ_WIN : Result.WIN;
+			return sumPlayer == 21 && playerStrategy.cards.size() == 2 ? Result.BJ_WIN : Result.WIN;
 		else if (sumPlayer < sumDealer)
+			return Result.LOST;
+		else if (sumPlayer == 21 && playerStrategy.cards.size() == 2 && cards.size() != 2)
+			return Result.BJ_WIN;
+		else if (sumDealer == 21 && playerStrategy.cards.size() != 2 && cards.size() == 2)
 			return Result.LOST;
 		else
 			return Result.DRAW;
@@ -56,11 +60,12 @@ public class Dealer extends Participant {
 	public Result hits() {
 		cards.add(deck.drawCard());
 		if (deck.countValueBeneficial(cards) > 21)
-			return deck.countValueBeneficial(playerStrategy.cards) == 21 ? Result.BJ_WIN : Result.WIN;
+			return deck.countValueBeneficial(playerStrategy.cards) == 21 && playerStrategy.cards.size() == 2
+					? Result.BJ_WIN : Result.WIN;
 		return Result.UNDECIDED;
 	}
 
-	public int openCard(){
+	public int openCard() {
 		return cards.get(0);
 	}
 }

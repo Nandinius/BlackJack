@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EvolvedBasicStrategy extends PlayerStrategy {
-    public EvolvedBasicStrategy(CardDeck deck) {
-        super(deck, "EvolvedBasicStrategy", false);
+	public EvolvedBasicStrategy(CardDeck deck) {
+		super(deck, "EvolvedBasicStrategy", false);
 
-    }
+	}
 
-    //@formatter:off
+	//@formatter:off
     Map<String, String[]> map = Stream.of(new Object[][][]{
             {{"8"},     {"h", "h", "h", "d", "d", "h", "h", "h", "h", "h",}},
             {{"9"},     {"d", "d", "d", "d", "d", "h", "h", "h", "h", "h",}},
@@ -49,46 +49,46 @@ public class EvolvedBasicStrategy extends PlayerStrategy {
             Arrays.stream(data[1]).map(Object::toString).toArray(String[]::new)));
     //@formatter:on
 
-    @Override
-    protected Trio[] strategy(int ignored) {
-        ArrayList<Trio> results = new ArrayList<>();
-        bet = 100;
+	@Override
+	protected Trio[] strategy(int ignored) {
+		ArrayList<Trio> results = new ArrayList<>();
+		bet = 100;
 
-        String action = null;
-        if (Objects.equals(cards.get(0), cards.get(1)))
-            action = map.get(cards.get(0) + " " + cards.get(0))[dealer.openCard() - 2];
-        else if (cards.remove(Integer.valueOf(11))) {
-            action = map.get("A" + cards.get(0))[dealer.openCard() - 2];
-            cards.add(11);
-        }
-        int value;
-        while ((value = deck.countValueBeneficial(cards)) < 17) {
-            if (action == null) {
-                if (value <= 7) {
-                    action = "h";
-                    continue;
-                }
-                action = map.get(Integer.toString(value))[dealer.openCard() - 2];
-            }
-            Result result = Result.UNDECIDED;
-            switch (action) {
-                case "h" -> result = hits();
-                case "s" -> result = stand();
-                case "d" -> {
-                    if (cards.size() == 2)
-                        result = doubleDown();
-                    else
-                        result = hits();
-                }
-                case "p" -> results.addAll(List.of(split()));
-            }
-            action = null;
-            if (result != Result.UNDECIDED) {
-                results.add(new Trio(bet, result, 0));
-                return results.toArray(new Trio[0]);
-            }
-        }
-        results.add(new Trio(bet, stand(), 0));
-        return results.toArray(new Trio[0]);
-    }
+		String action = null;
+		if (Objects.equals(cards.get(0), cards.get(1)))
+			action = map.get(cards.get(0) + " " + cards.get(0))[dealer.openCard() - 2];
+		else if (cards.remove(Integer.valueOf(11))) {
+			action = map.get("A" + cards.get(0))[dealer.openCard() - 2];
+			cards.add(11);
+		}
+		int value;
+		while ((value = deck.countValueBeneficial(cards)) < 17) {
+			if (action == null) {
+				if (value <= 7) {
+					action = "h";
+					continue;
+				}
+				action = map.get(Integer.toString(value))[dealer.openCard() - 2];
+			}
+			Result result = Result.UNDECIDED;
+			switch (action) {
+				case "h" -> result = hits();
+				case "s" -> result = stand();
+				case "d" -> {
+					if (cards.size() == 2)
+						result = doubleDown();
+					else
+						result = hits();
+				}
+				case "p" -> results.addAll(List.of(split()));
+			}
+			action = null;
+			if (result != Result.UNDECIDED) {
+				results.add(new Trio(bet, result, 0));
+				return results.toArray(new Trio[0]);
+			}
+		}
+		results.add(new Trio(bet, stand(), 0));
+		return results.toArray(new Trio[0]);
+	}
 }

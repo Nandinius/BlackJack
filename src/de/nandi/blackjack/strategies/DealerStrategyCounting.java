@@ -4,8 +4,8 @@ import com.aspose.cells.Workbook;
 import com.aspose.cells.Worksheet;
 import de.nandi.blackjack.participants.PlayerStrategy;
 import de.nandi.blackjack.util.CardDeck;
-import de.nandi.blackjack.util.Trio;
 import de.nandi.blackjack.util.Result;
+import de.nandi.blackjack.util.Trio;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ public class DealerStrategyCounting extends PlayerStrategy {
 
 	@Override
 	public Trio[] strategy(int ignored) {
-		int betCount = -deck.getTrueCount();//TODO wrong way around
+		int betCount = deck.getTrueCount();
 		count.add(betCount);
 		if (betCount < 1)
 			betCount = 1;

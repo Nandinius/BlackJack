@@ -15,7 +15,7 @@ public class DealerStrategy extends PlayerStrategy {
 	public Trio[] strategy(int ignored) {
 		bet = 100;
 		while (deck.countValueBeneficial(cards) < 17) {
-			if (hits() == Result.LOST)
+			if (hit() == Result.LOST)
 				return new Trio[]{new Trio(bet, Result.LOST, 0)};
 		}
 		return new Trio[]{new Trio(bet, stand(), 0)};

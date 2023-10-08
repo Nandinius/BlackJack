@@ -45,14 +45,14 @@ class DealerTest {
 		playerStrategy.cards.addAll(Arrays.asList(10, 11));
 		dealer.cards.clear();
 		dealer.cards.addAll(Arrays.asList(10, 10));
-		assertEquals(Result.BJ_WIN, dealer.hits());
+		assertEquals(Result.BJ_WIN, dealer.hit());
 		playerStrategy.cards.clear();
 		playerStrategy.cards.addAll(Arrays.asList(10, 8, 11));
 		dealer.cards.clear();
 		dealer.cards.addAll(Arrays.asList(10, 10, 11));
-		assertEquals(Result.WIN, dealer.hits());
+		assertEquals(Result.WIN, dealer.hit());
 		dealer.cards.clear();
 		dealer.cards.add(10);
-		assertEquals(Result.DRAW, dealer.hits());
+		assertEquals(Result.DRAW, dealer.hit());
 	}
 }

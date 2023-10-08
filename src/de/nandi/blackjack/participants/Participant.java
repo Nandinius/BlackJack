@@ -28,5 +28,5 @@ public abstract class Participant {
 	 * @return result for Player
 	 * @see Result
 	 */
-	public abstract Result hits();
+	public abstract Result hit();
 }

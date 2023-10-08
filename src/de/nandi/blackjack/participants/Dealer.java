@@ -20,7 +20,7 @@ public class Dealer extends Participant {
 	 */
 	public Result start() {
 		while (deck.countValueBeneficial(cards) < 17) {
-			Result result = hits();
+			Result result = hit();
 			if (result != Result.UNDECIDED)
 				return result;
 		}
@@ -57,7 +57,7 @@ public class Dealer extends Participant {
 	 * @see Result
 	 */
 	@Override
-	public Result hits() {
+	public Result hit() {
 		cards.add(deck.drawCard());
 		if (deck.countValueBeneficial(cards) > 21)
 			return deck.countValueBeneficial(playerStrategy.cards) == 21 && playerStrategy.cards.size() == 2

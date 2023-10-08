@@ -34,6 +34,10 @@ public abstract class PlayerStrategy extends Participant {
 		return strategy(-1);
 	}
 
+
+	/**
+	 * @param bet Only used if last action was split.
+	 */
 	protected abstract Trio[] strategy(int bet);
 
 
@@ -47,7 +51,7 @@ public abstract class PlayerStrategy extends Participant {
 	}
 
 	@Override
-	public Result hits() {
+	public Result hit() {
 		cards.add(deck.drawCard());
 		if (deck.countValueBeneficial(cards) > 21)
 			return Result.LOST;
@@ -69,7 +73,7 @@ public abstract class PlayerStrategy extends Participant {
 
 	public Result doubleDown() {
 		bet *= 2;
-		if (hits() == Result.LOST)
+		if (hit() == Result.LOST)
 			return Result.LOST;
 		return stand();
 	}

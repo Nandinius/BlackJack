@@ -16,9 +16,9 @@ class PlayerStrategyTest {
 		PlayerStrategy playerStrategy = new DealerStrategy(new CardDeck(1));
 		playerStrategy.cards.clear();
 		playerStrategy.cards.addAll(Arrays.asList(10, 10, 11));
-		assertEquals(Result.LOST, playerStrategy.hits());
+		assertEquals(Result.LOST, playerStrategy.hit());
 		playerStrategy.cards.clear();
 		playerStrategy.cards.add(10);
-		assertEquals(Result.DRAW, playerStrategy.hits());
+		assertEquals(Result.DRAW, playerStrategy.hit());
 	}
 }

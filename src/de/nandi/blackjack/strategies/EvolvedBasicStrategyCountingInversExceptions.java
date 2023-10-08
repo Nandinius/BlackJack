@@ -131,13 +131,13 @@ public class EvolvedBasicStrategyCountingInversExceptions extends PlayerStrategy
 			}
 			Result result = Result.UNDECIDED;
 			switch (action) {
-				case "h" -> result = hits();
+				case "h" -> result = hit();
 				case "s" -> result = stand();
 				case "d" -> {
 					if (cards.size() == 2)
 						result = doubleDown();
 					else
-						result = hits();
+						result = hit();
 				}
 				case "p" -> results.addAll(List.of(split()));
 			}

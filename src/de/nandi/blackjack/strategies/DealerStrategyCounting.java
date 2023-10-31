@@ -30,8 +30,8 @@ public class DealerStrategyCounting extends PlayerStrategy {
 		bet = 100 * betCount;
 		bets.add(bet);
 		while (deck.countValueBeneficial(cards) < 17) {
-			if (hit() == Result.LOST)
-				return new Trio[]{new Trio(bet, Result.LOST, betCount)};
+			if (hit() == Result.BUST)
+				return new Trio[]{new Trio(bet, Result.BUST, betCount)};
 		}
 		return new Trio[]{new Trio(bet, stand(), betCount)};
 	}

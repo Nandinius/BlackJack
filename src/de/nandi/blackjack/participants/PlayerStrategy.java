@@ -54,7 +54,7 @@ public abstract class PlayerStrategy extends Participant {
 	public Result hit() {
 		cards.add(deck.drawCard());
 		if (deck.countValueBeneficial(cards) > 21)
-			return Result.LOST;
+			return Result.BUST;
 		return Result.UNDECIDED;
 	}
 
@@ -73,8 +73,8 @@ public abstract class PlayerStrategy extends Participant {
 
 	public Result doubleDown() {
 		bet *= 2;
-		if (hit() == Result.LOST)
-			return Result.LOST;
+		if (hit() == Result.BUST)
+			return Result.BUST;
 		return stand();
 	}
 

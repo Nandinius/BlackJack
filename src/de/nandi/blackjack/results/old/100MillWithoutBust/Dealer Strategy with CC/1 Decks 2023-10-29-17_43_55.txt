@@ -1,0 +1,24 @@
+--- Dealer Strategy with CC ---
+1 Decks
+100000000 started Games
+100000000 simulated Games
+36.62% win 
+4.62% Blackjack win 
+9.51% draw 
+49.26% loss 
+Average gain (μ): -12.80%
+
+-Statistics with Positive Count-
+27043899 simulated Games
+37.61% win 
+2.51% Blackjack win 
+8.25% draw 
+51.63% loss 
+Average gain (μ): -36.47%
+-Statistics with <1 Count-
+72956101 simulated Games
+36.25% win 
+5.40% Blackjack win 
+9.97% draw 
+48.38% loss 
+Average gain (μ): -4.03%

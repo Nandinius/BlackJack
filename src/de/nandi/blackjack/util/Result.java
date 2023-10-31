@@ -5,6 +5,7 @@ public enum Result {
 	BJ_WIN(1.5),
 	DRAW(0),
 	LOST(-1),
+	BUST(-1),
 	UNDECIDED(Double.NaN);
 
 

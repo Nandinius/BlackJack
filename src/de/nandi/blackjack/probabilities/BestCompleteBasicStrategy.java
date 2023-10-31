@@ -3,8 +3,6 @@ package de.nandi.blackjack.probabilities;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -73,7 +71,7 @@ public class BestCompleteBasicStrategy {
 				prob(new ArrayList<>(List.of(i, i)), j);
 		}
 		System.out.println(mapToStringCopy());
-		File result = new File( "result.txt");
+		File result = new File("result.txt");
 		try {
 			if (!result.createNewFile()) {
 				System.out.println("Could not save File because it already exists.");

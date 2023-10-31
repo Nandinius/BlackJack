@@ -175,8 +175,8 @@ public class BestEasyBasicStrategy {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (String key : map.keySet()) {
 			stringBuilder.append("{{")
-					.append(String.format("%-8s", '"'+key+'"')).append("},{");
-			for (String value : map.get(key).getActions()){
+					.append(String.format("%-8s", '"' + key + '"')).append("},{");
+			for (String value : map.get(key).getActions()) {
 				stringBuilder.append('"').append(value).append('"').append(',').append(' ');
 			}
 			stringBuilder.append("}},\n");

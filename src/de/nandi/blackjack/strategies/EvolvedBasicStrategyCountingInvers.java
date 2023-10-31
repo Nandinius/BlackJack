@@ -52,8 +52,9 @@ public class EvolvedBasicStrategyCountingInvers extends PlayerStrategy {
 	@Override
 	protected Trio[] strategy(int splitBet) {
 		ArrayList<Trio> results = new ArrayList<>();
+		int trueCount = -deck.getTrueCount();
 		if (splitBet == -1) {
-			int betCount = -deck.getTrueCount();
+			int betCount = trueCount;
 			if (betCount < 1)
 				betCount = 1;
 			bet = 100 * betCount;
@@ -90,11 +91,19 @@ public class EvolvedBasicStrategyCountingInvers extends PlayerStrategy {
 			}
 			action = null;
 			if (result != Result.UNDECIDED) {
-				results.add(new Trio(bet, result, -deck.getTrueCount()));
+				results.add(new Trio(bet, result, trueCount));
 				return results.toArray(new Trio[0]);
 			}
+			if (cards.remove(Integer.valueOf(11))) {
+				int additionalValue = deck.countValueBeneficial(cards);
+				if (cards.contains(11))
+					additionalValue = cards.stream().mapToInt(Integer::intValue).map(oldValue -> oldValue == 11 ? 1 : oldValue).sum();
+				if (additionalValue < 11 && additionalValue > 1)
+					action = map.get("A" + additionalValue)[dealer.openCard() - 2];
+				cards.add(11);
+			}
 		}
-		results.add(new Trio(bet, stand(), -deck.getTrueCount()));
+		results.add(new Trio(bet, stand(), trueCount));
 		return results.toArray(new Trio[0]);
 	}
 }

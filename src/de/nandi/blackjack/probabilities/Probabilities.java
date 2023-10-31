@@ -12,7 +12,8 @@ public class Probabilities {
     private final double probabilityDraw = 4D / 52D;
 
     public Probabilities() {
-        System.out.println(bust(new ArrayList<>(List.of(6))));
+        new BestCompleteBasicStrategy();
+//        System.out.println(bustEasy(new ArrayList<>(List.of())));
 //        bustProbabilities = new double[18];
 //        double[] bustProbabilitiesFinal = new double[12];
 //        double bust;
@@ -44,9 +45,7 @@ public class Probabilities {
         double bust = 0;
         for (int i = 2; i <= 11; i++) {
             cards.add(i);
-            double probabilityDraw = probabilityDraw(cards, i);
-            if (probabilityDraw != 0)
-                bust += bust(cards) * probabilityDraw * (i==10?1:1);
+            bust += bustEasy(cards) * probabilityDraw * (i==10?4:1);
             cards.remove(cards.size()-1);
         }
         return bust;

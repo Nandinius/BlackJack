@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 public class EvolvedBasicStrategy extends PlayerStrategy {
 	public EvolvedBasicStrategy(CardDeck deck) {
 		super(deck, "EvolvedBasicStrategy", false);
-
 	}
 
 	//@formatter:off
     Map<String, String[]> map = Stream.of(new Object[][][]{
+			//			  2    3    4    5    6    7	8	 9	  10   A
             {{"8"},     {"h", "h", "h", "d", "d", "h", "h", "h", "h", "h",}},
             {{"9"},     {"d", "d", "d", "d", "d", "h", "h", "h", "h", "h",}},
             {{"10"},    {"d", "d", "d", "d", "d", "d", "d", "d", "h", "h",}},
@@ -86,6 +86,14 @@ public class EvolvedBasicStrategy extends PlayerStrategy {
 			if (result != Result.UNDECIDED) {
 				results.add(new Trio(bet, result, 0));
 				return results.toArray(new Trio[0]);
+			}
+			if (cards.remove(Integer.valueOf(11))) {
+				int additionalValue = deck.countValueBeneficial(cards);
+				if (cards.contains(11))
+					additionalValue = cards.stream().mapToInt(Integer::intValue).map(oldValue -> oldValue == 11 ? 1 : oldValue).sum();
+				if (additionalValue < 11 && additionalValue > 1)
+					action = map.get("A" + additionalValue)[dealer.openCard() - 2];
+				cards.add(11);
 			}
 		}
 		results.add(new Trio(bet, stand(), 0));

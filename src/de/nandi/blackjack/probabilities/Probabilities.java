@@ -11,7 +11,7 @@ public class Probabilities {
 	private final double probabilityDraw = 4D / 52D;
 
 	public Probabilities() {
-		new BestCompleteBasicStrategy();
+		new BestEasyBasicStrategy();
 //        System.out.println(bustEasy(new ArrayList<>(List.of())));
 //        bustProbabilities = new double[18];
 //        double[] bustProbabilitiesFinal = new double[12];

@@ -9,9 +9,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EvolvedBasicStrategy extends PlayerStrategy {
-	public EvolvedBasicStrategy(CardDeck deck) {
-		super(deck, "EvolvedBasicStrategy", false);
+public class ThorpBasicStrategyCountingInverse extends PlayerStrategy {
+	public ThorpBasicStrategyCountingInverse(CardDeck deck) {
+		super(deck, "ThorpBasicStrategyInverse", true);
 	}
 
 	//@formatter:off
@@ -32,15 +32,15 @@ public class EvolvedBasicStrategy extends PlayerStrategy {
             {{"A5"},    {"h", "h", "d", "d", "d", "h", "h", "h", "h", "h",}},
             {{"A6"},    {"d", "d", "d", "d", "d", "h", "h", "h", "h", "h",}},
             {{"A7"},    {"s", "d", "d", "d", "d", "s", "s", "h", "h", "s",}},
-            {{"A8"},    {"s", "s", "s", "d", "d", "s", "s", "s", "s", "s",}},
+            {{"A8"},    {"s", "s", "s", "s", "s", "s", "s", "s", "s", "s",}},
             {{"A9"},    {"s", "s", "s", "s", "s", "s", "s", "s", "s", "s",}},
             {{"A10"},   {"s", "s", "s", "s", "s", "s", "s", "s", "s", "s",}},
             {{"2 2"},   {"p", "p", "p", "p", "p", "p", "h", "h", "h", "h",}},
-            {{"3 3"},   {"h", "h", "p", "p", "p", "p", "h", "h", "h", "h",}},
-            {{"4 4"},   {"h", "h", "h", "d", "d", "h", "h", "h", "h", "h",}},
+            {{"3 3"},   {"p", "p", "p", "p", "p", "p", "h", "h", "h", "h",}},
+            {{"4 4"},   {"h", "h", "h", "p", "d", "h", "h", "h", "h", "h",}},
             {{"5 5"},   {"d", "d", "d", "d", "d", "d", "d", "d", "h", "h",}},
-            {{"6 6"},   {"p", "p", "p", "p", "p", "h", "h", "h", "h", "h",}},
-            {{"7 7"},   {"p", "p", "p", "p", "p", "p", "h", "h", "s", "h",}},
+            {{"6 6"},   {"p", "p", "p", "p", "p", "p", "h", "h", "h", "h",}},
+            {{"7 7"},   {"p", "p", "p", "p", "p", "p", "p", "h", "s", "h",}},
             {{"8 8"},   {"p", "p", "p", "p", "p", "p", "p", "p", "p", "p",}},
             {{"9 9"},   {"p", "p", "p", "p", "p", "s", "p", "p", "s", "s",}},
             {{"10 10"}, {"s", "s", "s", "s", "s", "s", "s", "s", "s", "s",}},
@@ -50,9 +50,16 @@ public class EvolvedBasicStrategy extends PlayerStrategy {
     //@formatter:on
 
 	@Override
-	protected Trio[] strategy(int ignored) {
+	protected Trio[] strategy(int splitBet) {
 		ArrayList<Trio> results = new ArrayList<>();
-		bet = 100;
+		int trueCount = deck.getTrueCount();
+		if (splitBet == -1) {
+			int betCount = trueCount;
+			if (betCount < 1)
+				betCount = 1;
+			bet = 100 * betCount;
+		} else
+			bet = splitBet;
 
 		String action = null;
 		if (Objects.equals(cards.get(0), cards.get(1)))
@@ -84,7 +91,7 @@ public class EvolvedBasicStrategy extends PlayerStrategy {
 			}
 			action = null;
 			if (result != Result.UNDECIDED) {
-				results.add(new Trio(bet, result, 0));
+				results.add(new Trio(bet, result, trueCount));
 				return results.toArray(new Trio[0]);
 			}
 			if (cards.remove(Integer.valueOf(11))) {
@@ -96,7 +103,7 @@ public class EvolvedBasicStrategy extends PlayerStrategy {
 				cards.add(11);
 			}
 		}
-		results.add(new Trio(bet, stand(), 0));
+		results.add(new Trio(bet, stand(), trueCount));
 		return results.toArray(new Trio[0]);
 	}
 }

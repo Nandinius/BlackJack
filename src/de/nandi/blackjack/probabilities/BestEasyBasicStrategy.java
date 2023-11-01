@@ -1,5 +1,8 @@
 package de.nandi.blackjack.probabilities;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class BestEasyBasicStrategy {
@@ -68,6 +71,38 @@ public class BestEasyBasicStrategy {
 				prob(new ArrayList<>(List.of(i, i)), j);
 		}
 		System.out.println(mapToStringCopy());
+		System.out.println(erwartungsWert());
+		File result = new File("BestEasyBasicStrategy.txt");
+		try {
+			if (!result.createNewFile()) {
+				System.out.println("Could not save File because it already exists.");
+				return;
+			}
+		} catch (IOException e) {
+			System.out.println("Could not save File.");
+			e.printStackTrace();
+			return;
+		}
+		try (FileWriter writer = new FileWriter(result)) {
+			writer.write(mapToString()+"\n");
+			writer.write(String.format(Locale.ENGLISH, "%." + 5 + "f" + "%% μ \n", erwartungsWert()*100));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private double erwartungsWert(){
+		double value = 0;
+		for (int a = 11; a >= 2; a--)
+			for (int b = 11; b >= 2; b--){
+				double value2 = 0;
+				for (int c = 11; c >= 2; c--){
+					value2 += map.get(cardsToString(new ArrayList<>(List.of(a, b)))).getExpectedValue()[c-2]
+					* probabilityDraw * (c == 10 ? 4 : 1);
+				}
+				value += value2 * probabilityDraw * (a == 10 ? 4 : 1) * probabilityDraw * (b == 10 ? 4 : 1);
+			}
+		return value;
 	}
 
 
@@ -137,10 +172,8 @@ public class BestEasyBasicStrategy {
 		if (playerValue > 21)
 			return -1;
 		ActionsDouble actionsDouble = map.get(String.valueOf(playerValue));
-		if (actionsDouble.isSet(dealerCards.get(0) - 2))
-			return actionsDouble.getExpectedValue()[dealerCards.get(0) - 2] / (
-					Objects.equals(actionsDouble.getActions()[dealerCards.get(0) - 2], "d") ? 2D : 1D
-			);
+		if (Objects.equals(actionsDouble.getActions()[dealerCards.get(0) - 2], "s"))
+			return actionsDouble.getExpectedValue()[dealerCards.get(0) - 2];
 		return dealer(playerValue, dealerCards);
 	}
 

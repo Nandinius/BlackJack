@@ -17,11 +17,11 @@ public class MathematicalEasyBasicStrategy extends PlayerStrategy {
 	//@formatter:off
     Map<String, String[]> map = Stream.of(new Object[][][]{
 			//			  2    3    4    5    6    7	8	 9	  10   A
-			{{"7"     },{"h", "h", "h", "h", "d", "h", "h", "h", "h", "h", }},
-			{{"8"     },{"h", "d", "d", "d", "d", "d", "h", "h", "h", "h", }},
-			{{"9"     },{"d", "d", "d", "d", "d", "d", "d", "h", "h", "h", }},
+			{{"7"     },{"h", "h", "h", "h", "h", "h", "h", "h", "h", "h", }},
+			{{"8"     },{"h", "h", "h", "h", "h", "h", "h", "h", "h", "h", }},
+			{{"9"     },{"h", "d", "d", "d", "d", "h", "h", "h", "h", "h", }},
 			{{"10"    },{"d", "d", "d", "d", "d", "d", "d", "d", "h", "h", }},
-			{{"11"    },{"d", "d", "d", "d", "d", "d", "d", "d", "d", "h", }},
+			{{"11"    },{"d", "d", "d", "d", "d", "d", "d", "d", "h", "h", }},
 			{{"12"    },{"h", "h", "s", "s", "s", "h", "h", "h", "h", "h", }},
 			{{"13"    },{"s", "s", "s", "s", "s", "h", "h", "h", "h", "h", }},
 			{{"14"    },{"s", "s", "s", "s", "s", "h", "h", "h", "h", "h", }},
@@ -31,14 +31,14 @@ public class MathematicalEasyBasicStrategy extends PlayerStrategy {
 			{{"A3"    },{"h", "h", "h", "d", "d", "h", "h", "h", "h", "h", }},
 			{{"A4"    },{"h", "h", "d", "d", "d", "h", "h", "h", "h", "h", }},
 			{{"A5"    },{"h", "h", "d", "d", "d", "h", "h", "h", "h", "h", }},
-			{{"A6"    },{"d", "d", "d", "d", "d", "d", "h", "h", "h", "h", }},
-			{{"A7"    },{"d", "d", "d", "d", "d", "s", "s", "h", "h", "h", }},
+			{{"A6"    },{"h", "d", "d", "d", "d", "h", "h", "h", "h", "h", }},
+			{{"A7"    },{"s", "d", "d", "d", "d", "s", "s", "h", "h", "h", }},
 			{{"A8"    },{"s", "s", "s", "s", "s", "s", "s", "s", "s", "s", }},
 			{{"A9"    },{"s", "s", "s", "s", "s", "s", "s", "s", "s", "s", }},
 			{{"A10"   },{"s", "s", "s", "s", "s", "s", "s", "s", "s", "s", }},
 			{{"2 2"   },{"p", "p", "p", "p", "p", "p", "p", "p", "p", "p", }},
 			{{"3 3"   },{"p", "p", "p", "p", "p", "p", "p", "p", "p", "p", }},
-			{{"4 4"   },{"h", "d", "d", "d", "d", "d", "p", "p", "p", "p", }},
+			{{"4 4"   },{"h", "h", "h", "h", "h", "h", "p", "p", "p", "p", }},
 			{{"5 5"   },{"d", "d", "d", "d", "d", "d", "d", "d", "h", "p", }},
 			{{"6 6"   },{"p", "p", "p", "p", "p", "p", "p", "p", "p", "p", }},
 			{{"7 7"   },{"p", "p", "p", "p", "p", "p", "p", "p", "p", "p", }},
@@ -46,7 +46,7 @@ public class MathematicalEasyBasicStrategy extends PlayerStrategy {
 			{{"9 9"   },{"s", "s", "s", "s", "s", "s", "s", "p", "p", "p", }},
 			{{"10 10" },{"s", "s", "s", "s", "s", "s", "s", "s", "s", "s", }},
 			{{"11 11" },{"p", "p", "p", "h", "d", "h", "p", "p", "p", "p", }},
-    }).collect(Collectors.toMap(data -> (String) data[0][0], data ->
+	}).collect(Collectors.toMap(data -> (String) data[0][0], data ->
             Arrays.stream(data[1]).map(Object::toString).toArray(String[]::new)));
     //@formatter:on
 

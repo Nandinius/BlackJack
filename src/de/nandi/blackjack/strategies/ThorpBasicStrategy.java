@@ -9,9 +9,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EvolvedBasicStrategy extends PlayerStrategy {
-	public EvolvedBasicStrategy(CardDeck deck) {
-		super(deck, "EvolvedBasicStrategy", false);
+public class ThorpBasicStrategy extends PlayerStrategy {
+	public ThorpBasicStrategy(CardDeck deck) {
+		super(deck, "ThorpBasicStrategy", false);
 	}
 
 	//@formatter:off
@@ -32,15 +32,15 @@ public class EvolvedBasicStrategy extends PlayerStrategy {
             {{"A5"},    {"h", "h", "d", "d", "d", "h", "h", "h", "h", "h",}},
             {{"A6"},    {"d", "d", "d", "d", "d", "h", "h", "h", "h", "h",}},
             {{"A7"},    {"s", "d", "d", "d", "d", "s", "s", "h", "h", "s",}},
-            {{"A8"},    {"s", "s", "s", "d", "d", "s", "s", "s", "s", "s",}},
+            {{"A8"},    {"s", "s", "s", "s", "s", "s", "s", "s", "s", "s",}},
             {{"A9"},    {"s", "s", "s", "s", "s", "s", "s", "s", "s", "s",}},
             {{"A10"},   {"s", "s", "s", "s", "s", "s", "s", "s", "s", "s",}},
             {{"2 2"},   {"p", "p", "p", "p", "p", "p", "h", "h", "h", "h",}},
-            {{"3 3"},   {"h", "h", "p", "p", "p", "p", "h", "h", "h", "h",}},
-            {{"4 4"},   {"h", "h", "h", "d", "d", "h", "h", "h", "h", "h",}},
+            {{"3 3"},   {"p", "p", "p", "p", "p", "p", "h", "h", "h", "h",}},
+            {{"4 4"},   {"h", "h", "h", "p", "d", "h", "h", "h", "h", "h",}},
             {{"5 5"},   {"d", "d", "d", "d", "d", "d", "d", "d", "h", "h",}},
-            {{"6 6"},   {"p", "p", "p", "p", "p", "h", "h", "h", "h", "h",}},
-            {{"7 7"},   {"p", "p", "p", "p", "p", "p", "h", "h", "s", "h",}},
+            {{"6 6"},   {"p", "p", "p", "p", "p", "p", "h", "h", "h", "h",}},
+            {{"7 7"},   {"p", "p", "p", "p", "p", "p", "p", "h", "s", "h",}},
             {{"8 8"},   {"p", "p", "p", "p", "p", "p", "p", "p", "p", "p",}},
             {{"9 9"},   {"p", "p", "p", "p", "p", "s", "p", "p", "s", "s",}},
             {{"10 10"}, {"s", "s", "s", "s", "s", "s", "s", "s", "s", "s",}},

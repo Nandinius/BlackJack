@@ -19,19 +19,23 @@ public class Main {
 
 
 	public Main() {
-		for (int i = 1; i <= 10; i++) {
-			testStrategy(new DealerStrategy(new CardDeck(i)), true);
-			testStrategy(new DealerStrategyCounting(new CardDeck(i)), true);
-			testStrategy(new DealerStrategyCountingInvers(new CardDeck(i)), true);
+		for (int i = 1000; i <= 1000; i++) {
+//			if(i != 1 && i !=4 && i != 8) continue;
+//			testStrategy(new DealerStrategy(new CardDeck(i)), true);
+//			testStrategy(new DealerStrategyCounting(new CardDeck(i)), true);
+//			testStrategy(new DealerStrategyCountingInvers(new CardDeck(i)), true);
 			testStrategy(new MathematicalEasyBasicStrategy(new CardDeck(i)), true);
-			testStrategy(new MathematicalEasyBasicStrategyCounting(new CardDeck(i)), true);
-			testStrategy(new MathematicalEasyBasicStrategyCountingInvers(new CardDeck(i)), true);
-			testStrategy(new EvolvedBasicStrategy(new CardDeck(i)), true);
-			testStrategy(new EvolvedBasicStrategyCounting(new CardDeck(i)), true);
-			testStrategy(new EvolvedBasicStrategyCountingInvers(new CardDeck(i)), true);
-			testStrategy(new EvolvedBasicStrategyCountingExceptions(new CardDeck(i)), true);
-			testStrategy(new EvolvedBasicStrategyCountingExceptionsInvers(new CardDeck(i)), true);
-			testStrategy(new EvolvedBasicStrategyCountingInversExceptions(new CardDeck(i)), true);
+//			testStrategy(new MathematicalEasyBasicStrategyCounting(new CardDeck(i)), true);
+//			testStrategy(new MathematicalEasyBasicStrategyCountingInvers(new CardDeck(i)), true);
+			testStrategy(new ThorpBasicStrategy(new CardDeck(i)), true);
+//			testStrategy(new ThorpBasicStrategyCounting(new CardDeck(i)), true);
+//			testStrategy(new ThorpBasicStrategyCountingInverse(new CardDeck(i)), true);
+//			testStrategy(new EvolvedBasicStrategy(new CardDeck(i)), true);
+//			testStrategy(new EvolvedBasicStrategyCounting(new CardDeck(i)), true);
+//			testStrategy(new EvolvedBasicStrategyCountingInvers(new CardDeck(i)), true);
+//			testStrategy(new EvolvedBasicStrategyCountingExceptions(new CardDeck(i)), true);
+//			testStrategy(new EvolvedBasicStrategyCountingExceptionsInvers(new CardDeck(i)), true);
+//			testStrategy(new EvolvedBasicStrategyCountingInversExceptions(new CardDeck(i)), true);
 		}
 		//dealerStrategy();
 		//formatPercentage(0.298, 0.110, 0.104, 0.488, 1, 10000000, "dealer");
@@ -39,7 +43,7 @@ public class Main {
 
 
 	public void testStrategy(PlayerStrategy playerStrategy, boolean saveToFile) {
-		int newGames = 1000000 * 100;
+		int newGames = 1000000 * 10;
 		double bJWins = 0;
 		double wins = 0;
 		double draws = 0;

@@ -1,0 +1,10 @@
+--- ThorpBasicStrategy10s ---
+1 Decks
+10000000 started Games
+10252104 simulated Games
+34.62% win 
+8.92% Blackjack win 
+12.06% draw 
+44.41% loss 
+15.65% bust 
+Average gain (μ): 5.04%

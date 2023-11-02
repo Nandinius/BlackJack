@@ -87,6 +87,10 @@ public abstract class PlayerStrategy extends Participant {
 		return deck.getDecks();
 	}
 
+	public int getRemovedTens() {
+		return deck.getRemovedTens();
+	}
+
 	public boolean isCardCounting() {
 		return cardCounting;
 	}

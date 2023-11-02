@@ -8,7 +8,7 @@ import de.nandi.blackjack.util.Trio;
 public class DealerStrategy extends PlayerStrategy {
 
 	public DealerStrategy(CardDeck deck) {
-		super(deck, "Dealer strategy", false);
+		super(deck, "Dealer strategy10s", false);
 	}
 
 	@Override

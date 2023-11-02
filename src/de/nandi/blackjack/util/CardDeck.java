@@ -9,6 +9,7 @@ public class CardDeck {
 	private final ArrayList<Integer> usedCardDeck;
 	private final int decks;
 	private boolean shuffled;
+	private int removedTens = 0;
 
 	private int runningCount = 0;
 
@@ -17,6 +18,14 @@ public class CardDeck {
 		currentCardDeck = new ArrayList<>();
 		usedCardDeck = new ArrayList<>();
 		initializeCardDeck();
+	}
+
+	public CardDeck(int decks, int removedTens) {
+		this.removedTens = removedTens;
+		this.decks = decks;
+		currentCardDeck = new ArrayList<>();
+		usedCardDeck = new ArrayList<>();
+		initializeCardDeck(removedTens);
 	}
 
 	/**
@@ -36,6 +45,41 @@ public class CardDeck {
 		shuffle();
 	}
 
+	private void initializeCardDeck(int removedTens) {
+		for (int i = 0; i < decks; i++)
+			for (int colors = 0; colors < 4; colors++) {
+				currentCardDeck.add(11);//Ace
+				currentCardDeck.add(10);//King
+				currentCardDeck.add(10);//Queen
+				currentCardDeck.add(10);//Jack
+				for (int numbers = 10; numbers >= 2; numbers--)
+					currentCardDeck.add(numbers);//Numbers
+			}
+		if (removedTens > 1) {
+			while (removedTens > 16) {
+				currentCardDeck.remove((Integer) 11);
+				removedTens--;
+			}
+			for (int i = 0; i < removedTens; i++) {
+				currentCardDeck.remove((Integer) 10);
+			}
+		} else {
+			removedTens = -removedTens;
+			int card = 6;
+			int i = 0;
+			while (removedTens > 0) {
+				if (i == 4) {
+					card--;
+					i = 0;
+				}
+				currentCardDeck.remove((Integer) card);
+				i++;
+				removedTens--;
+			}
+		}
+		shuffle();
+	}
+
 	/**
 	 * This method returns the first card of the deck and removes it.
 	 * If there are less than 25% of the cards in the deck it will be shuffled.
@@ -48,6 +92,9 @@ public class CardDeck {
 		int card = currentCardDeck.remove(0);
 		usedCardDeck.add(card);
 		if (usedCardDeck.size() >= currentCardDeck.size() * 3) {
+			shuffle();
+		}
+		if (removedTens != 0 && usedCardDeck.size() * 4 >= currentCardDeck.size()) {
 			shuffle();
 		}
 		if (card <= 6)
@@ -100,6 +147,10 @@ public class CardDeck {
 
 	public int getDecks() {
 		return decks;
+	}
+
+	public int getRemovedTens() {
+		return removedTens;
 	}
 
 	public int getRunningCount() {

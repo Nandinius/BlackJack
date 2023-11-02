@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class ThorpBasicStrategy extends PlayerStrategy {
 	public ThorpBasicStrategy(CardDeck deck) {
-		super(deck, "ThorpBasicStrategy", false);
+		super(deck, "ThorpBasicStrategy10s", false);
 	}
 
 	//@formatter:off

@@ -1,0 +1,11 @@
+--- MathematicalEasyBasicStrategy10s ---
+1 Decks
+10000000 started Games
+10156345 simulated Games
+38.58% win 
+5.03% Blackjack win 
+8.65% draw 
+47.74% loss 
+17.48% bust 
+Average gain (μ): 0.03%
+missing 10s: -1

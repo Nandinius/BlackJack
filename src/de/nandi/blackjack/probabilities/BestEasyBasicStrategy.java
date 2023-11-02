@@ -72,7 +72,8 @@ public class BestEasyBasicStrategy {
 		}
 		System.out.println(mapToStringCopy());
 		System.out.println(erwartungsWert());
-		File result = new File("BestEasyBasicStrategy.txt");
+		File result = new File("D:\\nandi\\Desktop\\Programieren\\Workspace\\Blackjack\\src\\de\\nandi\\blackjack\\probabilities\\" +
+				"BestEasyBasicStrategy2.txt");
 		try {
 			if (!result.createNewFile()) {
 				System.out.println("Could not save File because it already exists.");
@@ -84,21 +85,21 @@ public class BestEasyBasicStrategy {
 			return;
 		}
 		try (FileWriter writer = new FileWriter(result)) {
-			writer.write(mapToString()+"\n");
-			writer.write(String.format(Locale.ENGLISH, "%." + 5 + "f" + "%% μ \n", erwartungsWert()*100));
+			writer.write(mapToString() + "\n");
+			writer.write(String.format(Locale.ENGLISH, "%." + 5 + "f" + "%% μ \n", erwartungsWert() * 100));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private double erwartungsWert(){
+	private double erwartungsWert() {
 		double value = 0;
 		for (int a = 11; a >= 2; a--)
-			for (int b = 11; b >= 2; b--){
+			for (int b = 11; b >= 2; b--) {
 				double value2 = 0;
-				for (int c = 11; c >= 2; c--){
-					value2 += map.get(cardsToString(new ArrayList<>(List.of(a, b)))).getExpectedValue()[c-2]
-					* probabilityDraw * (c == 10 ? 4 : 1);
+				for (int c = 11; c >= 2; c--) {
+					value2 += map.get(cardsToString(new ArrayList<>(List.of(a, b)))).getExpectedValue()[c - 2]
+							* probabilityDraw * (c == 10 ? 4 : 1);
 				}
 				value += value2 * probabilityDraw * (a == 10 ? 4 : 1) * probabilityDraw * (b == 10 ? 4 : 1);
 			}
@@ -144,8 +145,9 @@ public class BestEasyBasicStrategy {
 			int playerCard = playerCards.remove(0);
 			for (int i = 2; i <= 11; i++) {
 				playerCards.add(i);
-				split += prob(playerCards, dealerCard) * probabilityDraw * (i == 10 ? 4 : 1) * 2
-						* (2 * (probabilityDraw));
+				double prob = prob(playerCards, dealerCard);
+				split += prob * probabilityDraw * (i == 10 ? 4 : 1) * 2
+						+ prob * (2 * (probabilityDraw * (i == 10 ? 4 : 1)));
 				playerCards.remove(playerCards.size() - 1);
 			}
 			playerCards.add(playerCard);

@@ -19,15 +19,15 @@ public class Main {
 
 
 	public Main() {
-		for (int i = 1000; i <= 1000; i++) {
-//			if(i != 1 && i !=4 && i != 8) continue;
+		for (int i = 1; i <= 10; i++) {
+//			if (i != 1 && i != 4 && i != 8 && i != 1000) continue;
 //			testStrategy(new DealerStrategy(new CardDeck(i)), true);
 //			testStrategy(new DealerStrategyCounting(new CardDeck(i)), true);
 //			testStrategy(new DealerStrategyCountingInvers(new CardDeck(i)), true);
-			testStrategy(new MathematicalEasyBasicStrategy(new CardDeck(i)), true);
+//			testStrategy(new MathematicalEasyBasicStrategy(new CardDeck(i)), true);
 //			testStrategy(new MathematicalEasyBasicStrategyCounting(new CardDeck(i)), true);
 //			testStrategy(new MathematicalEasyBasicStrategyCountingInvers(new CardDeck(i)), true);
-			testStrategy(new ThorpBasicStrategy(new CardDeck(i)), true);
+//			testStrategy(new ThorpBasicStrategy(new CardDeck(i)), true);
 //			testStrategy(new ThorpBasicStrategyCounting(new CardDeck(i)), true);
 //			testStrategy(new ThorpBasicStrategyCountingInverse(new CardDeck(i)), true);
 //			testStrategy(new EvolvedBasicStrategy(new CardDeck(i)), true);
@@ -36,6 +36,12 @@ public class Main {
 //			testStrategy(new EvolvedBasicStrategyCountingExceptions(new CardDeck(i)), true);
 //			testStrategy(new EvolvedBasicStrategyCountingExceptionsInvers(new CardDeck(i)), true);
 //			testStrategy(new EvolvedBasicStrategyCountingInversExceptions(new CardDeck(i)), true);
+		}
+//		for (int i = 20; i > 0; i--) {
+//			testStrategy(new MathematicalEasyBasicStrategy(new CardDeck(1, i)), true);
+//		}
+		for (int i = 1; i < 20; i++) {
+			testStrategy(new DealerStrategy(new CardDeck(1, -i)), true);
 		}
 		//dealerStrategy();
 		//formatPercentage(0.298, 0.110, 0.104, 0.488, 1, 10000000, "dealer");
@@ -115,6 +121,7 @@ public class Main {
 				append(newGames).append(" started Games\n").
 				append(games).append(" simulated Games\n");
 		formatPercentages(wins, bJWins, draws, losses, busts, games, gains, resultText);
+		resultText.append("missing 10s: ").append(playerStrategy.getRemovedTens());
 		if (playerStrategy.isCardCounting()) {
 			resultText.append("\n-Statistics with Positive Count-\n");
 			resultText.append(gamesWPC).append(" simulated Games\n");

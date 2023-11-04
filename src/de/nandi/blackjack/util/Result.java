@@ -10,12 +10,22 @@ public enum Result {
 
 
 	private final double winningsMultiplier;
+	private boolean doubleDown;
 
 	Result(double winningsMultiplier) {
 		this.winningsMultiplier = winningsMultiplier;
+		doubleDown = false;
 	}
 
 	public double getWinningsMultiplier() {
 		return winningsMultiplier;
+	}
+
+	public void setDoubleDown(boolean doubleDown) {
+		this.doubleDown = doubleDown;
+	}
+
+	public boolean isDoubleDown() {
+		return doubleDown;
 	}
 }

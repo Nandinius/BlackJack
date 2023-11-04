@@ -52,7 +52,7 @@ public class EvolvedBasicStrategyCounting extends PlayerStrategy {
 	@Override
 	protected Trio[] strategy(int splitBet) {
 		ArrayList<Trio> results = new ArrayList<>();
-		int trueCount = deck.getTrueCount();
+		int trueCount = deck.getBetCount();
 		if (splitBet == -1) {
 			int betCount = trueCount;
 			if (betCount < 1)

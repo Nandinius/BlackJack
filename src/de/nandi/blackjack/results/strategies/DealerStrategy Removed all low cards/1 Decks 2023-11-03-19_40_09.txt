@@ -1,0 +1,11 @@
+--- Dealer strategy10s ---
+1 Decks
+100000000 started Games
+100000000 simulated Games
+34.93% win 
+6.64% Blackjack win 
+10.03% draw 
+48.41% loss 
+26.15% bust 
+Average gain (μ): -3.52%
+missing 10s: -9

@@ -75,7 +75,8 @@ public class BestEasyBasicStrategyRemovedTens {
 		System.out.println(mapToStringCopy());
 		System.out.println(erwartungsWert());
 		File result = new File("D:\\nandi\\Desktop\\Programieren\\Workspace\\Blackjack\\src\\de\\nandi\\blackjack\\probabilities\\" +
-				"BestEasyBasicStrategy RemovedTens:"+removedTens+".txt");
+//				"resultsPC\\" +
+				"BestEasyBasicStrategy RemovedTens PC" + removedTens + ".txt");
 		try {
 			if (!result.createNewFile()) {
 				System.out.println("Could not save File because it already exists.");
@@ -88,22 +89,22 @@ public class BestEasyBasicStrategyRemovedTens {
 		}
 		try (FileWriter writer = new FileWriter(result)) {
 			writer.write(mapToString()+"\n");
-			writer.write(String.format(Locale.ENGLISH, "%." + 5 + "f" + "%% μ \n", erwartungsWert()*100));
+			writer.write(String.format(Locale.ENGLISH, "%." + 5 + "f" + "%% μ \n", erwartungsWert() * 100));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private double erwartungsWert(){
+	private double erwartungsWert() {
 		double value = 0;
 		for (int a = 11; a >= 2; a--)
-			for (int b = 11; b >= 2; b--){
+			for (int b = 11; b >= 2; b--) {
 				double value2 = 0;
-				for (int c = 11; c >= 2; c--){
-					value2 += map.get(cardsToString(new ArrayList<>(List.of(a, b)))).getExpectedValue()[c-2]
-					* probabilityDraw / (c == 10 ? 16 : 1);
+				for (int c = 11; c >= 2; c--) {
+					value2 += map.get(cardsToString(new ArrayList<>(List.of(a, b)))).getExpectedValue()[c - 2]
+							* probabilityDraw(c);
 				}
-				value += value2 * probabilityDraw * (a == 10 ? 4 : 1) * probabilityDraw * (b == 10 ? 4 : 1);
+				value += value2 * probabilityDraw(a) * probabilityDraw(b);
 			}
 		return value;
 	}
@@ -130,14 +131,14 @@ public class BestEasyBasicStrategyRemovedTens {
 		double hit = 0;
 		for (int i = 2; i <= 11; i++) {
 			playerCards.add(i);
-			hit += prob(playerCards, dealerCard) * probabilityDraw * (i == 10 ? 4 : 1);
+			hit += prob(playerCards, dealerCard) * probabilityDraw(i);
 			playerCards.remove(playerCards.size() - 1);
 		}
 		double dd = 0;
 		for (int i = 2; i <= 11; i++) {
 			playerCards.add(i);
 			dd += dd(countValueBeneficial(playerCards), new ArrayList<>(List.of(dealerCard)))
-					* probabilityDraw * (i == 10 ? 4 : 1) * 2;
+					* probabilityDraw(i) * 2;
 			playerCards.remove(playerCards.size() - 1);
 		}
 		double split = -1000;
@@ -148,8 +149,8 @@ public class BestEasyBasicStrategyRemovedTens {
 			for (int i = 2; i <= 11; i++) {
 				playerCards.add(i);
 				double prob = prob(playerCards, dealerCard);
-				split += prob * probabilityDraw * (i == 10 ? 4 : 1) * 2
-						+ prob * (2 * (probabilityDraw));
+				split += prob * probabilityDraw(i) * 2
+						+ prob * (2 * (probabilityDraw(i)));
 				playerCards.remove(playerCards.size() - 1);
 			}
 			playerCards.add(playerCard);
@@ -199,13 +200,15 @@ public class BestEasyBasicStrategyRemovedTens {
 		return bust;
 	}
 
-	private double probabilityDraw(int card){
-		if(removedTens > 0)
-			if(card == 10)
-				return 1D/52D * (16 -removedTens);
+	private double probabilityDraw(int card) {
+		if (removedTens >= 0)
+			if (card == 10)
+				return 1D / 52D * (16 - removedTens);
 //		if(removedTens < 0)
 //
-		return probabilityDraw;
+		if(card == -removedTens)
+			return 3D / 52D;
+		return probabilityDraw * (card == 10 ? 4 : 1);
 	}
 
 	private String mapToString() {
@@ -226,6 +229,19 @@ public class BestEasyBasicStrategyRemovedTens {
 				stringBuilder.append('"').append(value).append('"').append(',').append(' ');
 			}
 			stringBuilder.append("}},\n");
+		}
+		return stringBuilder.toString();
+	}
+
+	private String mapToStringPC() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (String key : map.keySet()) {
+			stringBuilder
+					.append(key).append(";");
+			for (String value : map.get(key).getActions()) {
+				stringBuilder.append(value).append(',');
+			}
+			stringBuilder.append('\n');
 		}
 		return stringBuilder.toString();
 	}

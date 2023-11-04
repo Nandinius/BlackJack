@@ -73,7 +73,7 @@ public class BestEasyBasicStrategy {
 		System.out.println(mapToStringCopy());
 		System.out.println(erwartungsWert());
 		File result = new File("D:\\nandi\\Desktop\\Programieren\\Workspace\\Blackjack\\src\\de\\nandi\\blackjack\\probabilities\\" +
-				"BestEasyBasicStrategy2.txt");
+				"BestEasyBasicStrategy.txt");
 		try {
 			if (!result.createNewFile()) {
 				System.out.println("Could not save File because it already exists.");
@@ -147,7 +147,7 @@ public class BestEasyBasicStrategy {
 				playerCards.add(i);
 				double prob = prob(playerCards, dealerCard);
 				split += prob * probabilityDraw * (i == 10 ? 4 : 1) * 2
-						+ prob * (2 * (probabilityDraw * (i == 10 ? 4 : 1)));
+						+ prob * probabilityDraw * (i == 10 ? 4 : 1) * 2;
 				playerCards.remove(playerCards.size() - 1);
 			}
 			playerCards.add(playerCard);

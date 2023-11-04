@@ -1,6 +1,7 @@
 package de.nandi.blackjack.probabilities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Probabilities {
 	public static void main(String[] args) {
@@ -11,8 +12,11 @@ public class Probabilities {
 	private final double probabilityDraw = 4D / 52D;
 
 	public Probabilities() {
-		new BestEasyBasicStrategy();
-//        System.out.println(bustEasy(new ArrayList<>(List.of())));
+//		for (int i = 6; i > 1; i--) {
+//			new BestEasyBasicStrategyRemovedTens(-i);
+//		}
+//		new BestEasyBasicStrategy();
+        System.out.println(bustEasy(new ArrayList<>(List.of())));
 //        bustProbabilities = new double[18];
 //        double[] bustProbabilitiesFinal = new double[12];
 //        double bust;

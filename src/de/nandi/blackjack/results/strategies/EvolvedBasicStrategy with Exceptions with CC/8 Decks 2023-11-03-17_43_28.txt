@@ -1,0 +1,27 @@
+--- EvolvedBasicStrategy with Exceptions with CC ---
+8 Decks
+100000000 started Games
+101712573 simulated Games
+38.54% win 
+4.81% Blackjack win 
+8.72% draw 
+47.93% loss 
+18.05% bust 
+Average gain (μ): -0.44%
+
+-Statistics with Positive Count-
+11752763 simulated Games
+38.31% win 
+5.65% Blackjack win 
+8.70% draw 
+47.34% loss 
+0.00% bust 
+Average gain (μ): 3.53%
+-Statistics with <1 Count-
+89959810 simulated Games
+38.58% win 
+4.70% Blackjack win 
+8.72% draw 
+48.00% loss 
+20.41% bust 
+Average gain (μ): -0.95%

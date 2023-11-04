@@ -1,0 +1,27 @@
+--- ThorpBasicStrategy noCC with CC ---
+8 Decks
+100000000 started Games
+102472559 simulated Games
+38.55% win 
+4.77% Blackjack win 
+8.70% draw 
+47.98% loss 
+16.44% bust 
+Average gain (μ): -0.80%
+
+-Statistics with Positive Count-
+11757057 simulated Games
+38.14% win 
+5.59% Blackjack win 
+9.01% draw 
+47.26% loss 
+17.31% bust 
+Average gain (μ): 0.89%
+-Statistics with <1 Count-
+90715502 simulated Games
+38.60% win 
+4.66% Blackjack win 
+8.66% draw 
+48.07% loss 
+16.33% bust 
+Average gain (μ): -1.02%

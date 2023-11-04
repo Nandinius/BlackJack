@@ -1,0 +1,27 @@
+--- ThorpBasicStrategyInverse with CC ---
+4 Decks
+100000000 started Games
+102385301 simulated Games
+38.57% win 
+4.78% Blackjack win 
+8.66% draw 
+47.99% loss 
+16.47% bust 
+Average gain (μ): -2.11%
+
+-Statistics with Positive Count-
+17681740 simulated Games
+38.88% win 
+3.86% Blackjack win 
+8.37% draw 
+48.89% loss 
+15.37% bust 
+Average gain (μ): -10.83%
+-Statistics with <1 Count-
+84703561 simulated Games
+38.50% win 
+4.97% Blackjack win 
+8.73% draw 
+47.80% loss 
+16.70% bust 
+Average gain (μ): -0.29%

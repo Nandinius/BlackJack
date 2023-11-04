@@ -2,6 +2,8 @@ package de.nandi.blackjack.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CardDeck {
 
@@ -10,6 +12,7 @@ public class CardDeck {
 	private final int decks;
 	private boolean shuffled;
 	private int removedTens = 0;
+	private final LinkedList<Integer> betCount = new LinkedList<>(List.of(0, 0, 0, 0, 0));
 
 	private int runningCount = 0;
 
@@ -65,6 +68,7 @@ public class CardDeck {
 			}
 		} else {
 			removedTens = -removedTens;
+//			currentCardDeck.remove((Integer) removedTens);
 			int card = 6;
 			int i = 0;
 			while (removedTens > 0) {
@@ -101,13 +105,19 @@ public class CardDeck {
 			runningCount++;
 		if (card >= 10)
 			runningCount--;
+		updateBetCount(card);
 		return card;
+	}
+
+	private void updateBetCount(int card) {
+		betCount.removeFirst();
+		betCount.add((wasShuffled() ? 0 : betCount.getLast()) + (card <= 6 ? 1 : card >= 10 ? -1 : 0));
 	}
 
 	/**
 	 * @return true if the deck was shuffled since the last call to {@code wasShuffled}
 	 */
-	public boolean wasShuffled() {//TODO vielleicht unnötig
+	public boolean wasShuffled() {
 		if (shuffled) {
 			shuffled = false;
 			return true;
@@ -159,5 +169,9 @@ public class CardDeck {
 
 	public int getTrueCount() {
 		return runningCount / (currentCardDeck.size() / 52 + 1);
+	}
+
+	public int getBetCount() {
+		return betCount.getFirst() / (currentCardDeck.size() / 52 + 1);
 	}
 }

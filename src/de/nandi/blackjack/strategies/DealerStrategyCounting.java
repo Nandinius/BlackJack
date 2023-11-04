@@ -14,38 +14,21 @@ import java.util.ArrayList;
 
 public class DealerStrategyCounting extends PlayerStrategy {
 
-	private final ArrayList<Integer> bets = new ArrayList<>();
-	private final ArrayList<Integer> count = new ArrayList<>();
-
 	public DealerStrategyCounting(CardDeck deck) {
-		super(deck, "Dealer Strategy", true);
+		super(deck, "DealerStrategy", true);
 	}
 
 	@Override
 	public Trio[] strategy(int ignored) {
-		int betCount = deck.getTrueCount();
-		count.add(betCount);
+		int betCount = deck.getBetCount();
+		int trueCount = betCount;
 		if (betCount < 1)
 			betCount = 1;
 		bet = 100 * betCount;
-		bets.add(bet);
 		while (deck.countValueBeneficial(cards) < 17) {
 			if (hit() == Result.BUST)
-				return new Trio[]{new Trio(bet, Result.BUST, betCount)};
+				return new Trio[]{new Trio(bet, Result.BUST, trueCount)};
 		}
-		return new Trio[]{new Trio(bet, stand(), betCount)};
-	}
-
-	public void saveExcel() throws Exception {
-		Workbook workbook = new Workbook();
-		Worksheet sheet = workbook.getWorksheets().get(0);
-		sheet.getCells().importArrayList(count, 0, 0, true);
-		sheet.getCells().importArrayList(bets, 0, 1, true);
-		File file = new File("D:\\nandi\\Desktop\\Programieren\\Workspace\\BlackJack\\src\\de\\nandi\\" +
-				"blackjack\\results\\excel", getName() + (isCardCounting() ? " with Card Counting " : " ")
-				+ " Excel " + deck.getDecks() + " Decks " +
-				LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH_mm_ss")) + ".xlsx");
-
-		workbook.save(file.getAbsolutePath());
+		return new Trio[]{new Trio(bet, stand(), trueCount)};
 	}
 }

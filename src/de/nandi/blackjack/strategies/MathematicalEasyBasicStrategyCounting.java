@@ -36,15 +36,15 @@ public class MathematicalEasyBasicStrategyCounting extends PlayerStrategy {
 			{{"A8"    },{"s", "s", "s", "s", "s", "s", "s", "s", "s", "s", }},
 			{{"A9"    },{"s", "s", "s", "s", "s", "s", "s", "s", "s", "s", }},
 			{{"A10"   },{"s", "s", "s", "s", "s", "s", "s", "s", "s", "s", }},
-			{{"2 2"   },{"p", "p", "p", "p", "p", "p", "h", "h", "h", "h", }},
-			{{"3 3"   },{"h", "p", "p", "p", "p", "p", "h", "h", "h", "h", }},
-			{{"4 4"   },{"h", "h", "p", "p", "p", "h", "h", "h", "h", "h", }},
+			{{"2 2"   },{"h", "p", "p", "p", "p", "p", "h", "h", "h", "h", }},
+			{{"3 3"   },{"h", "h", "p", "p", "p", "p", "h", "h", "h", "h", }},
+			{{"4 4"   },{"h", "h", "h", "p", "p", "h", "h", "h", "h", "h", }},
 			{{"5 5"   },{"d", "d", "d", "d", "d", "d", "d", "d", "h", "h", }},
-			{{"6 6"   },{"h", "p", "p", "p", "p", "h", "h", "h", "h", "h", }},
-			{{"7 7"   },{"p", "p", "p", "p", "p", "p", "h", "h", "h", "h", }},
+			{{"6 6"   },{"h", "h", "p", "p", "p", "h", "h", "h", "h", "h", }},
+			{{"7 7"   },{"s", "p", "p", "p", "p", "p", "h", "h", "h", "h", }},
 			{{"8 8"   },{"p", "p", "p", "p", "p", "p", "p", "h", "h", "h", }},
 			{{"9 9"   },{"p", "p", "p", "p", "p", "p", "p", "s", "s", "s", }},
-			{{"10 10" },{"s", "s", "s", "p", "p", "s", "s", "s", "s", "s", }},
+			{{"10 10" },{"p", "p", "p", "p", "p", "p", "s", "s", "s", "s", }},
 			{{"11 11" },{"p", "p", "p", "p", "p", "p", "p", "p", "p", "p", }},
     }).collect(Collectors.toMap(data -> (String) data[0][0], data ->
             Arrays.stream(data[1]).map(Object::toString).toArray(String[]::new)));
@@ -53,7 +53,7 @@ public class MathematicalEasyBasicStrategyCounting extends PlayerStrategy {
 	@Override
 	protected Trio[] strategy(int splitBet) {
 		ArrayList<Trio> results = new ArrayList<>();
-		int trueCount = deck.getTrueCount();
+		int trueCount = deck.getBetCount();
 		if (splitBet == -1) {
 			int betCount = trueCount;
 			if (betCount < 1)

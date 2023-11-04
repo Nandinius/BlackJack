@@ -1,0 +1,27 @@
+--- MathematicalEasyBasicStrategy noCC with CC ---
+4 Decks
+100000000 started Games
+101797176 simulated Games
+38.56% win 
+4.81% Blackjack win 
+8.72% draw 
+47.91% loss 
+17.10% bust 
+Average gain (μ): -0.57%
+
+-Statistics with Positive Count-
+16525398 simulated Games
+38.04% win 
+5.80% Blackjack win 
+9.08% draw 
+47.08% loss 
+18.12% bust 
+Average gain (μ): 1.31%
+-Statistics with <1 Count-
+85271778 simulated Games
+38.66% win 
+4.62% Blackjack win 
+8.65% draw 
+48.07% loss 
+16.90% bust 
+Average gain (μ): -0.93%

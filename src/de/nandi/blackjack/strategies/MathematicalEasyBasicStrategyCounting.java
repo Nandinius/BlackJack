@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 public class MathematicalEasyBasicStrategyCounting extends PlayerStrategy {
 	public MathematicalEasyBasicStrategyCounting(CardDeck deck) {
 		super(deck, "MathematicalEasyBasicStrategy", true);
+
 	}
 
 	//@formatter:off

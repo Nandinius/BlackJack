@@ -21,8 +21,9 @@ public enum Result {
 		return winningsMultiplier;
 	}
 
-	public void setDoubleDown(boolean doubleDown) {
+	public Result setDoubleDown(boolean doubleDown) {
 		this.doubleDown = doubleDown;
+		return this;
 	}
 
 	public boolean isDoubleDown() {

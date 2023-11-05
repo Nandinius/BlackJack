@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class MathematicalEasyBasicStrategyWrong extends PlayerStrategy {
 	public MathematicalEasyBasicStrategyWrong(CardDeck deck) {
-		super(deck, "MathematicalEasyBasicStrategy", false);
+		super(deck, "MathematicalEasyBasicStrategy Changed 16", false);
 	}
 
 	//@formatter:off

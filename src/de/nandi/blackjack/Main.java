@@ -1,7 +1,7 @@
 package de.nandi.blackjack;
 
 import de.nandi.blackjack.participants.PlayerStrategy;
-import de.nandi.blackjack.strategies.DealerStrategy;
+import de.nandi.blackjack.strategies.*;
 import de.nandi.blackjack.util.CardDeck;
 import de.nandi.blackjack.util.Trio;
 
@@ -20,19 +20,25 @@ public class Main {
 		new Main();
 	}
 
+	//TODO merge branches
 
 	public Main() {
-		for (int i = 1; i <= 1; i++) {
+		for (int i = 1; i <= 1000; i++) {
 			if (i != 1 && i != 4 && i != 8 && i != 1000) continue;
-			testStrategy(new DealerStrategy(new CardDeck(i)), true);
+//			testStrategy(new DealerStrategy(new CardDeck(i)), true);
 //			testStrategy(new DealerStrategyCounting(new CardDeck(i)), true);
+//			testStrategy(new DealerStrategyCountingFutureTrueCount(new CardDeck(i)), true);
+//			testStrategy(new DealerStrategyCountingFutureTrueCountInvers(new CardDeck(i)), true);
+//			testStrategy(new DealerStrategyNoCounting(new CardDeck(i)), true);
 //			testStrategy(new DealerStrategyCountingInvers(new CardDeck(i)), true);
 //			testStrategy(new MathematicalEasyBasicStrategy(new CardDeck(i)), true);
+//			testStrategy(new MathematicalEasyBasicStrategyWrong(new CardDeck(i)), true);
 //			testStrategy(new MathematicalEasyBasicStrategyCounting(new CardDeck(i)), true);
 //			testStrategy(new MathematicalEasyBasicStrategyCountingInvers(new CardDeck(i)), true);
 //			testStrategy(new MathematicalEasyBasicStrategyCountingExceptions(new CardDeck(i)), true);
 //			testStrategy(new ThorpBasicStrategy(new CardDeck(i)), true);
 //			testStrategy(new ThorpBasicStrategyCounting(new CardDeck(i)), true);
+//			testStrategy(new ThorpBasicStrategyNoCounting(new CardDeck(i)), true);
 //			testStrategy(new ThorpBasicStrategyCountingInverse(new CardDeck(i)), true);
 //			testStrategy(new EvolvedBasicStrategy(new CardDeck(i)), true);
 //			testStrategy(new EvolvedBasicStrategyCounting(new CardDeck(i)), true);
@@ -41,9 +47,9 @@ public class Main {
 //			testStrategy(new EvolvedBasicStrategyCountingExceptionsInvers(new CardDeck(i)), true);
 //			testStrategy(new EvolvedBasicStrategyCountingInversExceptions(new CardDeck(i)), true);
 		}
-//		for (int i = 16; i > 0; i--) {
-//			testStrategy(new BestStrategysRemoved10s(new CardDeck(1, i)), true);
-//		}
+		for (int i = 16; i > 0; i--) {
+			testStrategy(new BestStrategysRemoved10s(new CardDeck(1, i)), true);
+		}
 //		for (int i = 1; i <= 20; i++) {
 //			testStrategy(new DealerStrategy(new CardDeck(1, -i)), true);
 //		}
@@ -63,6 +69,9 @@ public class Main {
 		double losses = 0;
 		double busts = 0;
 		double gains = 0;
+		double ddBJWins = 0;
+		double ddWins = 0;
+		double ddLosses = 0;
 		int games = 0;
 		double winsWithPositiveCount = 0;
 		double bJWinsWPC = 0;
@@ -70,6 +79,9 @@ public class Main {
 		double lossesWPC = 0;
 		double bustsWPC = 0;
 		double gainsWPC = 0;
+		double ddBJWinsWPC = 0;
+		double ddWinsWPC = 0;
+		double ddLossesWPC = 0;
 		int gamesWPC = 0;
 		int positivCount = 1;
 		for (int i = 0; i < newGames; i++)
@@ -79,11 +91,21 @@ public class Main {
 						if (result.getTrueCount() > positivCount)
 							bJWinsWPC++;
 						bJWins++;
+						if (result.isDoubleDown()) {
+							if (result.getTrueCount() > positivCount)
+								ddBJWinsWPC++;
+							ddBJWins++;
+						}
 					}
 					case WIN -> {
 						if (result.getTrueCount() > positivCount)
 							winsWithPositiveCount++;
 						wins++;
+						if (result.isDoubleDown()) {
+							if (result.getTrueCount() > positivCount)
+								ddWinsWPC++;
+							ddWins++;
+						}
 					}
 					case DRAW -> {
 						if (result.getTrueCount() > positivCount)
@@ -94,6 +116,11 @@ public class Main {
 						if (result.getTrueCount() > positivCount)
 							lossesWPC++;
 						losses++;
+						if (result.isDoubleDown()) {
+							if (result.getTrueCount() > positivCount)
+								ddLossesWPC++;
+							ddLosses++;
+						}
 					}
 					case BUST -> {
 						if (result.getTrueCount() > positivCount)
@@ -102,6 +129,11 @@ public class Main {
 						if (result.getTrueCount() > positivCount)
 							bustsWPC++;
 						busts++;
+						if (result.isDoubleDown()) {
+							if (result.getTrueCount() > positivCount)
+								ddLossesWPC++;
+							ddLosses++;
+						}
 					}
 				}
 				gains += result.getGain();
@@ -128,18 +160,20 @@ public class Main {
 				append(playerStrategy.getDecks()).append(" Decks\n").
 				append(newGames).append(" started Games\n").
 				append(games).append(" simulated Games\n");
-		formatPercentages(wins, bJWins, draws, losses, busts, games, gains, resultText);
+		formatPercentages(wins, bJWins, draws, losses, busts, games, gains, ddWins, ddBJWins, ddLosses, resultText);
 		if (playerStrategy.getRemovedTens() != 0)
 			resultText.append("missing 10s: ").append(playerStrategy.getRemovedTens()).append("\n");
-		if (playerStrategy.isCardCounting()) {
+		if (playerStrategy.isCardCounting() && playerStrategy.getDecks() < 500) {
 			resultText.append("\n-Statistics with Positive Count-\n");
 			resultText.append(gamesWPC).append(" simulated Games\n");
 			formatPercentages(winsWithPositiveCount, bJWinsWPC, drawsWPC, lossesWPC, bustsWPC,
-					gamesWPC, gainsWPC, resultText);
+					gamesWPC, gainsWPC, ddWinsWPC, ddBJWinsWPC, ddLossesWPC, resultText);
 			resultText.append("-Statistics with <1 Count-\n");
 			resultText.append(games - gamesWPC).append(" simulated Games\n");
 			formatPercentages(wins - winsWithPositiveCount, bJWins - bJWinsWPC, draws - drawsWPC,
-					losses - lossesWPC, busts - bustsWPC, games - gamesWPC, gains - gainsWPC, resultText);
+					losses - lossesWPC, busts - bustsWPC, games - gamesWPC, gains - gainsWPC,
+					ddWins - ddWinsWPC, ddBJWins - ddBJWinsWPC, ddLosses - ddLossesWPC,
+					resultText);
 		}
 		System.out.println(resultText);
 
@@ -165,6 +199,7 @@ public class Main {
 
 	private void formatPercentages(double wins, double bJWins, double draws, double losses,
 								   double busts, double games, double gains,
+								   double ddWins, double ddBjWins, double ddLosses,
 								   StringBuilder resultText) {
 		String format = "%." + 2 + "f";//precision 2 best
 		resultText.append(String.format(Locale.ENGLISH, format + "%% win \n", wins / games * 100));
@@ -176,17 +211,24 @@ public class Main {
 		format = "%." + 3 + "f";//precision 3 best
 		resultText.append(String.format(Locale.ENGLISH, "Average gain (μ): " + format, gains / games));
 		resultText.append("% (");
-		BigDecimal gain = new BigDecimal(gains).divide(new BigDecimal(games), MathContext.UNLIMITED)
-				.divide(new BigDecimal(100), MathContext.UNLIMITED);
+		MathContext mathContext = MathContext.DECIMAL128;
+		BigDecimal gain = new BigDecimal(gains).divide(new BigDecimal(games), mathContext)
+				.divide(new BigDecimal(100), mathContext);
 		BigDecimal deviationBig = new BigDecimal(0)
-				.add(new BigDecimal(-1).subtract(gain).pow(2, MathContext.UNLIMITED)
-						.multiply(new BigDecimal(losses), MathContext.UNLIMITED))
-				.add(new BigDecimal(1).subtract(gain).pow(2, MathContext.UNLIMITED)
-						.multiply(new BigDecimal(wins), MathContext.UNLIMITED))
-				.add(new BigDecimal("1.5").subtract(gain).pow(2, MathContext.UNLIMITED)
-						.multiply(new BigDecimal(bJWins), MathContext.UNLIMITED))
-				.divide(new BigDecimal(games).pow(2, MathContext.UNLIMITED), MathContext.UNLIMITED)
-				.sqrt(MathContext.DECIMAL128);
+				.add(new BigDecimal(-1).subtract(gain).pow(2, mathContext)
+						.multiply(new BigDecimal(losses-ddLosses), mathContext))
+				.add(new BigDecimal(1).subtract(gain).pow(2, mathContext)
+						.multiply(new BigDecimal(wins-ddWins), mathContext))
+				.add(new BigDecimal("1.5").subtract(gain).pow(2, mathContext)
+						.multiply(new BigDecimal(bJWins-ddBjWins), mathContext))
+				.add(new BigDecimal(-2).subtract(gain).pow(2, mathContext)
+						.multiply(new BigDecimal(ddLosses), mathContext))
+				.add(new BigDecimal(2).subtract(gain).pow(2, mathContext)
+						.multiply(new BigDecimal(ddWins), mathContext))
+				.add(new BigDecimal(3).subtract(gain).pow(2, mathContext)
+						.multiply(new BigDecimal(ddBjWins), mathContext))
+				.divide(new BigDecimal(games).pow(2, mathContext), mathContext)
+				.sqrt(mathContext);
 
 		resultText.append(gain.subtract(deviationBig.multiply(new BigDecimal(2))).movePointRight(2)
 				.setScale(3, RoundingMode.HALF_UP).toPlainString()).append("%; ");

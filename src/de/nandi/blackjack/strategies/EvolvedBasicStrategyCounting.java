@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 public class EvolvedBasicStrategyCounting extends PlayerStrategy {
 	public EvolvedBasicStrategyCounting(CardDeck deck) {
 		super(deck, "EvolvedBasicStrategy", true);
-
 	}
 
 	//@formatter:off

@@ -9,6 +9,7 @@ public class DealerStrategy extends PlayerStrategy {
 
 	public DealerStrategy(CardDeck deck) {
 		super(deck, "DealerStrategy", false);
+
 	}
 
 	@Override

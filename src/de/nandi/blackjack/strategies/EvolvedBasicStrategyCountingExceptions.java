@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 public class EvolvedBasicStrategyCountingExceptions extends PlayerStrategy {
 	public EvolvedBasicStrategyCountingExceptions(CardDeck deck) {
 		super(deck, "EvolvedBasicStrategy with Exceptions", true);
-
 	}
 
 	//@formatter:off

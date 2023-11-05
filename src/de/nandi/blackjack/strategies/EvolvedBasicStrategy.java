@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 public class EvolvedBasicStrategy extends PlayerStrategy {
 	public EvolvedBasicStrategy(CardDeck deck) {
 		super(deck, "EvolvedBasicStrategy", false);
+
 	}
 
 	//@formatter:off

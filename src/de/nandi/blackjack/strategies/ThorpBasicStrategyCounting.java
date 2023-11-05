@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 public class ThorpBasicStrategyCounting extends PlayerStrategy {
 	public ThorpBasicStrategyCounting(CardDeck deck) {
 		super(deck, "ThorpBasicStrategy", true);
+
 	}
 
 	//@formatter:off

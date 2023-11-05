@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 public class MathematicalEasyBasicStrategyCountingExceptions extends PlayerStrategy {
 	public MathematicalEasyBasicStrategyCountingExceptions(CardDeck deck) {
 		super(deck, "MathematicalEasyBasicStrategy with Exceptions", true);
-
 	}
 
 	//@formatter:off

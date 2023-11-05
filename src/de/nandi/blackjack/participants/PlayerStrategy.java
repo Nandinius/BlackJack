@@ -74,8 +74,8 @@ public abstract class PlayerStrategy extends Participant {
 	public Result doubleDown() {
 		bet *= 2;
 		if (hit() == Result.BUST)
-			return Result.BUST;
-		return stand();
+			return Result.BUST.setDoubleDown(true);
+		return stand().setDoubleDown(true);
 	}
 
 

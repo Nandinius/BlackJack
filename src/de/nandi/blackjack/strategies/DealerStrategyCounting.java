@@ -16,6 +16,7 @@ public class DealerStrategyCounting extends PlayerStrategy {
 
 	public DealerStrategyCounting(CardDeck deck) {
 		super(deck, "DealerStrategy", true);
+
 	}
 
 	@Override
